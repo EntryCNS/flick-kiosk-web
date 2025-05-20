@@ -48,7 +48,7 @@ export default function LoginScreen(): React.ReactElement {
     handleSubmit,
     formState: { errors },
     setError,
-    clearErrors,
+    // clearErrors,
     watch,
     setFocus,
   } = useForm<LoginFormData>({
@@ -123,13 +123,13 @@ export default function LoginScreen(): React.ReactElement {
     [loginMutation]
   );
 
-  const goToQrScanner = useCallback(() => {
-    if (!isMounted.current) return;
-    if (loginMutation.isPending) return;
+  // const goToQrScanner = useCallback(() => {
+  //   if (!isMounted.current) return;
+  //   if (loginMutation.isPending) return;
 
-    clearErrors();
-    navigate("/auth/qr");
-  }, [loginMutation.isPending, clearErrors, navigate]);
+  //   clearErrors();
+  //   navigate("/auth/qr");
+  // }, [loginMutation.isPending, clearErrors, navigate]);
 
   const handleFieldFocus = useCallback((fieldName: string) => {
     if (isMounted.current) {
@@ -306,7 +306,7 @@ export default function LoginScreen(): React.ReactElement {
               )}
             </motion.button>
           </form>
-
+          {/* 
           <div className="flex items-center my-6">
             <div className="flex-1 h-px bg-[#E2E8F0]"></div>
             <span className="mx-4 text-sm text-[#64748B]">또는</span>
@@ -338,8 +338,8 @@ export default function LoginScreen(): React.ReactElement {
             </svg>
             <span className="text-[#6366F1] text-base font-semibold">
               QR 코드로 등록하기
-            </span>
-          </motion.button>
+            </span> */}
+          {/* </motion.button> */}
         </motion.div>
       </div>
     </div>
