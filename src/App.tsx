@@ -23,7 +23,6 @@ function AppRoutes() {
     };
   }, []);
 
-  // 초기화 완료 체크
   useEffect(() => {
     if (initialized && isMounted.current) {
       setIsLoading(false);

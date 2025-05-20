@@ -48,7 +48,6 @@ export default function LoginScreen(): React.ReactElement {
     handleSubmit,
     formState: { errors },
     setError,
-    // clearErrors,
     watch,
     setFocus,
   } = useForm<LoginFormData>({
@@ -122,14 +121,6 @@ export default function LoginScreen(): React.ReactElement {
     },
     [loginMutation]
   );
-
-  // const goToQrScanner = useCallback(() => {
-  //   if (!isMounted.current) return;
-  //   if (loginMutation.isPending) return;
-
-  //   clearErrors();
-  //   navigate("/auth/qr");
-  // }, [loginMutation.isPending, clearErrors, navigate]);
 
   const handleFieldFocus = useCallback((fieldName: string) => {
     if (isMounted.current) {

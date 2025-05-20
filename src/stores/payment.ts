@@ -31,7 +31,6 @@ interface PaymentState {
 
 const DEFAULT_TIMER = 900;
 
-// 웹 환경에서 localStorage를 사용하기 위한 스토리지 어댑터
 const webStorage = {
   getItem: async (name: string): Promise<string | null> => {
     try {

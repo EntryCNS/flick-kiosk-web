@@ -654,14 +654,14 @@ export default function PaymentScreen(): React.ReactElement {
   const getWsStatusColor = useCallback(() => {
     switch (wsStatus) {
       case "CONNECTED":
-        return "#22C55E"; // success500
+        return "#22C55E";
       case "CONNECTING":
-        return "#F59E0B"; // warning500
+        return "#F59E0B";
       case "DISCONNECTED":
       case "FAILED":
-        return "#EF4444"; // danger500
+        return "#EF4444";
       default:
-        return "#64748B"; // gray500
+        return "#64748B";
     }
   }, [wsStatus]);
 

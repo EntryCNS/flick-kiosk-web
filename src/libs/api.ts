@@ -2,7 +2,6 @@ import axios, { AxiosError, type AxiosResponse } from "axios";
 import { API_URL } from "../constants/api";
 import { useAuthStore } from "../stores/auth";
 
-// API 클라이언트 인스턴스 생성
 const api = axios.create({
   baseURL: API_URL,
   headers: {
@@ -10,7 +9,6 @@ const api = axios.create({
   },
 });
 
-// 요청 인터셉터 - 인증 토큰 추가
 api.interceptors.request.use((config) => {
   const { token } = useAuthStore.getState();
   if (token) {
