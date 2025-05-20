@@ -10,7 +10,6 @@ import { isAxiosError } from "axios";
 import { QRCodeSVG } from "qrcode.react";
 import { motion } from "framer-motion";
 import { API_URL } from "@/constants/api";
-import { COLORS } from "@/constants/colors";
 import api from "@/libs/api";
 import { useCartStore } from "@/stores/cart";
 import { usePaymentStore } from "@/stores/payment";
@@ -567,7 +566,7 @@ export default function PaymentScreen(): React.ReactElement {
       case "ORDER_NOT_FOUND":
         return (
           <motion.button
-            className="bg-primary-500 text-white py-3 px-5 rounded-xl text-sm font-semibold mt-3.5"
+            className="bg-[#6366F1] text-[#FFFFFF] py-3 px-5 rounded-xl text-sm font-semibold mt-3.5"
             onClick={() => {
               if (isMounted.current) {
                 navigate("/products");
@@ -581,7 +580,7 @@ export default function PaymentScreen(): React.ReactElement {
       default:
         return (
           <motion.button
-            className="bg-primary-500 text-white py-3 px-5 rounded-xl text-sm font-semibold mt-3.5 min-w-[150px]"
+            className="bg-[#6366F1] text-[#FFFFFF] py-3 px-5 rounded-xl text-sm font-semibold mt-3.5 min-w-[150px]"
             onClick={handleRetry}
             whileTap={{ scale: 0.95 }}
           >
@@ -620,17 +619,17 @@ export default function PaymentScreen(): React.ReactElement {
       <motion.button
         key={`key-${key}-${index}`}
         className={`w-14 h-14 flex items-center justify-center rounded-lg ${
-          key === "delete" || key === "clear" ? "bg-gray-200" : "bg-gray-50"
+          key === "delete" || key === "clear" ? "bg-[#E2E8F0]" : "bg-[#F8FAFC]"
         }`}
         onClick={() => handleKeypadPress(key)}
         whileTap={{ scale: 0.95 }}
       >
         {key === "delete" ? (
-          <span className="text-gray-700 text-xl">←</span>
+          <span className="text-[#334155] text-xl">←</span>
         ) : key === "clear" ? (
-          <span className="text-gray-700 text-xl">C</span>
+          <span className="text-[#334155] text-xl">C</span>
         ) : (
-          <span className="text-gray-900 text-xl">{key}</span>
+          <span className="text-[#1E293B] text-xl">{key}</span>
         )}
       </motion.button>
     ),
@@ -655,14 +654,14 @@ export default function PaymentScreen(): React.ReactElement {
   const getWsStatusColor = useCallback(() => {
     switch (wsStatus) {
       case "CONNECTED":
-        return COLORS.success500;
+        return "#22C55E"; // success500
       case "CONNECTING":
-        return COLORS.warning500;
+        return "#F59E0B"; // warning500
       case "DISCONNECTED":
       case "FAILED":
-        return COLORS.danger500;
+        return "#EF4444"; // danger500
       default:
-        return COLORS.gray500;
+        return "#64748B"; // gray500
     }
   }, [wsStatus]);
 
@@ -675,8 +674,8 @@ export default function PaymentScreen(): React.ReactElement {
     if (qrPaymentMutation.isPending || (!requestCode && !errorMessage)) {
       return (
         <div className="flex flex-col items-center justify-center">
-          <div className="w-8 h-8 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-          <p className="text-sm text-gray-700">QR 코드 생성 중...</p>
+          <div className="w-8 h-8 border-4 border-[#6366F1] border-t-transparent rounded-full animate-spin mb-4"></div>
+          <p className="text-sm text-[#334155]">QR 코드 생성 중...</p>
         </div>
       );
     }
@@ -690,7 +689,7 @@ export default function PaymentScreen(): React.ReactElement {
           transition={{ duration: 0.3 }}
         >
           <svg
-            className="w-11 h-11 text-red-500 mb-3.5"
+            className="w-11 h-11 text-[#EF4444] mb-3.5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -702,7 +701,7 @@ export default function PaymentScreen(): React.ReactElement {
               d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <p className="text-red-500 text-base font-medium text-center mx-4 mb-3.5">
+          <p className="text-[#EF4444] text-base font-medium text-center mx-4 mb-3.5">
             {errorMessage}
           </p>
           {renderErrorAction()}
@@ -718,7 +717,7 @@ export default function PaymentScreen(): React.ReactElement {
         transition={{ duration: 0.3 }}
       >
         <motion.div
-          className="p-4 bg-white border border-gray-200 rounded-xl mb-5"
+          className="p-4 bg-[#FFFFFF] border border-[#E2E8F0] rounded-xl mb-5"
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.3 }}
@@ -731,10 +730,10 @@ export default function PaymentScreen(): React.ReactElement {
             level="H"
           />
         </motion.div>
-        <p className="text-lg font-semibold text-gray-900 mb-3 text-center">
+        <p className="text-lg font-semibold text-[#1E293B] mb-3 text-center">
           QR 코드를 스캔하여 결제해 주세요
         </p>
-        <p className="text-sm text-gray-600 text-center mb-5">
+        <p className="text-sm text-[#475569] text-center mb-5">
           결제가 완료될 때까지 기다려주세요
         </p>
       </motion.div>
@@ -756,7 +755,7 @@ export default function PaymentScreen(): React.ReactElement {
           transition={{ duration: 0.3 }}
         >
           <svg
-            className="w-14 h-14 text-green-500 mb-4"
+            className="w-14 h-14 text-[#22C55E] mb-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -768,10 +767,10 @@ export default function PaymentScreen(): React.ReactElement {
               d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <p className="text-lg font-semibold text-gray-900 mb-2 text-center">
+          <p className="text-lg font-semibold text-[#1E293B] mb-2 text-center">
             학번 결제가 요청되었습니다
           </p>
-          <p className="text-sm text-gray-600 mb-5 text-center">
+          <p className="text-sm text-[#475569] mb-5 text-center">
             결제가 완료될 때까지 기다려주세요
           </p>
 
@@ -780,12 +779,12 @@ export default function PaymentScreen(): React.ReactElement {
               {studentId.split("").map((digit, index) => (
                 <motion.div
                   key={index}
-                  className="w-11 h-13 flex items-center justify-center bg-primary-50 rounded-lg"
+                  className="w-11 h-13 flex items-center justify-center bg-[#EEF2FF] rounded-lg"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.2, delay: index * 0.1 }}
                 >
-                  <span className="text-xl font-bold text-primary-700">
+                  <span className="text-xl font-bold text-[#4338CA]">
                     {digit}
                   </span>
                 </motion.div>
@@ -794,14 +793,14 @@ export default function PaymentScreen(): React.ReactElement {
           </div>
 
           <motion.button
-            className="bg-primary-500 text-white py-3 px-5 rounded-xl text-sm font-semibold min-w-[150px] flex items-center justify-center"
+            className="bg-[#6366F1] text-[#FFFFFF] py-3 px-5 rounded-xl text-sm font-semibold min-w-[150px] flex items-center justify-center"
             onClick={handleRetry}
             disabled={isSubmitting}
             whileTap={{ scale: 0.95 }}
-            whileHover={{ backgroundColor: COLORS.primary600 }}
+            whileHover={{ backgroundColor: "#4F46E5" }}
           >
             {isSubmitting ? (
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-5 h-5 border-2 border-[#FFFFFF] border-t-transparent rounded-full animate-spin"></div>
             ) : (
               <span>다시 요청하기</span>
             )}
@@ -819,7 +818,7 @@ export default function PaymentScreen(): React.ReactElement {
           transition={{ duration: 0.3 }}
         >
           <svg
-            className="w-11 h-11 text-red-500 mb-3.5"
+            className="w-11 h-11 text-[#EF4444] mb-3.5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -831,7 +830,7 @@ export default function PaymentScreen(): React.ReactElement {
               d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <p className="text-red-500 text-base font-medium text-center mx-4 mb-3.5">
+          <p className="text-[#EF4444] text-base font-medium text-center mx-4 mb-3.5">
             {errorMessage}
           </p>
           {renderErrorAction()}
@@ -846,7 +845,7 @@ export default function PaymentScreen(): React.ReactElement {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
       >
-        <p className="text-lg font-semibold text-gray-900 mb-4.5 text-center">
+        <p className="text-lg font-semibold text-[#1E293B] mb-4.5 text-center">
           4자리 학번을 입력해주세요
         </p>
 
@@ -856,15 +855,15 @@ export default function PaymentScreen(): React.ReactElement {
               key={`digit-${index}`}
               className={`w-11 h-14 flex items-center justify-center border-b-2 ${
                 index < studentId.length
-                  ? "border-primary-500"
-                  : "border-gray-300"
+                  ? "border-[#6366F1]"
+                  : "border-[#CBD5E1]"
               }`}
               initial={{ y: 10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
               {index < studentId.length && (
-                <span className="text-2xl font-bold text-gray-900">
+                <span className="text-2xl font-bold text-[#1E293B]">
                   {studentId[index]}
                 </span>
               )}
@@ -875,10 +874,10 @@ export default function PaymentScreen(): React.ReactElement {
         {renderKeypad()}
 
         <motion.button
-          className={`w-56 h-12 rounded-xl text-white text-base font-semibold mt-2.5 ${
+          className={`w-56 h-12 rounded-xl text-[#FFFFFF] text-base font-semibold mt-2.5 ${
             !validateStudentId(studentId) || studentIdPaymentMutation.isPending
-              ? "bg-gray-300 opacity-80"
-              : "bg-primary-500"
+              ? "bg-[#CBD5E1] opacity-80"
+              : "bg-[#6366F1]"
           }`}
           onClick={handleStudentIdSubmit}
           disabled={
@@ -892,11 +891,11 @@ export default function PaymentScreen(): React.ReactElement {
           whileHover={
             !validateStudentId(studentId) || studentIdPaymentMutation.isPending
               ? {}
-              : { backgroundColor: COLORS.primary600 }
+              : { backgroundColor: "#4F46E5" }
           }
         >
           {studentIdPaymentMutation.isPending ? (
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <div className="w-5 h-5 border-2 border-[#FFFFFF] border-t-transparent rounded-full animate-spin mx-auto"></div>
           ) : (
             <span>결제 요청하기</span>
           )}
@@ -918,16 +917,16 @@ export default function PaymentScreen(): React.ReactElement {
   ]);
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-screen bg-[#F8FAFC]">
       {notification && (
         <motion.div
           ref={notificationRef}
-          className={`fixed top-4 left-1/2 -ml-40 w-80 bg-white rounded-lg flex items-center p-3.5 z-50 shadow-md ${
+          className={`fixed top-4 left-1/2 -ml-40 w-80 bg-[#FFFFFF] rounded-lg flex items-center p-3.5 z-50 shadow-md ${
             notification.type === "success"
-              ? "border-l-4 border-green-500"
+              ? "border-l-4 border-[#22C55E]"
               : notification.type === "error"
-              ? "border-l-4 border-red-500"
-              : "border-l-4 border-primary-500"
+              ? "border-l-4 border-[#EF4444]"
+              : "border-l-4 border-[#6366F1]"
           }`}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -936,7 +935,7 @@ export default function PaymentScreen(): React.ReactElement {
         >
           {notification.type === "success" && (
             <svg
-              className="w-6 h-6 text-green-500"
+              className="w-6 h-6 text-[#22C55E]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -951,7 +950,7 @@ export default function PaymentScreen(): React.ReactElement {
           )}
           {notification.type === "error" && (
             <svg
-              className="w-6 h-6 text-red-500"
+              className="w-6 h-6 text-[#EF4444]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -966,7 +965,7 @@ export default function PaymentScreen(): React.ReactElement {
           )}
           {notification.type === "info" && (
             <svg
-              className="w-6 h-6 text-primary-500"
+              className="w-6 h-6 text-[#6366F1]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -980,11 +979,11 @@ export default function PaymentScreen(): React.ReactElement {
             </svg>
           )}
           <div className="ml-2.5 flex-1">
-            <p className="text-sm font-semibold text-gray-900">
+            <p className="text-sm font-semibold text-[#1E293B]">
               {notification.message}
             </p>
             {notification.submessage && (
-              <p className="text-xs text-gray-600 mt-0.5">
+              <p className="text-xs text-[#475569] mt-0.5">
                 {notification.submessage}
               </p>
             )}
@@ -994,12 +993,12 @@ export default function PaymentScreen(): React.ReactElement {
             onClick={() => setNotification(null)}
             whileTap={{ scale: 0.9 }}
           >
-            <span className="text-xl text-gray-600">&times;</span>
+            <span className="text-xl text-[#475569]">&times;</span>
           </motion.button>
         </motion.div>
       )}
 
-      <header className="flex items-center justify-between bg-white px-5 py-3.5 border-b border-gray-200 h-15">
+      <header className="flex items-center justify-between bg-[#FFFFFF] px-5 py-3.5 border-b border-[#E2E8F0] h-15">
         <motion.button
           className="flex items-center px-2.5 py-1.5 rounded-lg"
           onClick={() => {
@@ -1009,10 +1008,10 @@ export default function PaymentScreen(): React.ReactElement {
           }}
           disabled={isSubmitting}
           whileTap={{ scale: 0.95 }}
-          whileHover={{ backgroundColor: COLORS.gray100 }}
+          whileHover={{ backgroundColor: "#F1F5F9" }}
         >
           <svg
-            className="w-6 h-6 text-gray-800"
+            className="w-6 h-6 text-[#1E293B]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -1024,13 +1023,13 @@ export default function PaymentScreen(): React.ReactElement {
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          <span className="ml-1 text-base font-medium text-gray-800">
+          <span className="ml-1 text-base font-medium text-[#1E293B]">
             돌아가기
           </span>
         </motion.button>
 
-        <h1 className="text-xl font-bold text-gray-900">
-          <span className="text-primary-500">Flick</span> Place
+        <h1 className="text-xl font-bold text-[#1E293B]">
+          <span className="text-[#6366F1]">Flick</span> Place
         </h1>
 
         <div className="flex items-center gap-3">
@@ -1043,7 +1042,7 @@ export default function PaymentScreen(): React.ReactElement {
             whileTap={wsStatus === "FAILED" ? { scale: 0.9 } : {}}
           />
           <motion.div
-            className={`flex items-center px-3 py-1.5 bg-gray-100 rounded-lg`}
+            className={`flex items-center px-3 py-1.5 bg-[#F1F5F9] rounded-lg`}
             animate={{
               opacity: timerPulse && timer <= 60 ? 0.6 : 1,
             }}
@@ -1051,7 +1050,7 @@ export default function PaymentScreen(): React.ReactElement {
           >
             <svg
               className={`w-5 h-5 ${
-                timer <= 60 ? "text-red-500" : "text-gray-700"
+                timer <= 60 ? "text-[#EF4444]" : "text-[#334155]"
               }`}
               fill="none"
               viewBox="0 0 24 24"
@@ -1066,7 +1065,7 @@ export default function PaymentScreen(): React.ReactElement {
             </svg>
             <span
               className={`ml-1.5 text-sm font-bold ${
-                timer <= 60 ? "text-red-500" : "text-gray-800"
+                timer <= 60 ? "text-[#EF4444]" : "text-[#1E293B]"
               }`}
             >
               {formatTime(timer)}
@@ -1077,30 +1076,28 @@ export default function PaymentScreen(): React.ReactElement {
 
       <div className="flex flex-1 p-5 gap-5">
         <motion.div
-          className="flex-grow flex flex-col bg-white rounded-xl overflow-hidden border border-gray-200"
+          className="flex-grow flex flex-col bg-[#FFFFFF] rounded-xl overflow-hidden border border-[#E2E8F0]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="flex border-b border-gray-200 h-13">
+          <div className="flex border-b border-[#E2E8F0] h-13">
             <motion.button
               className={`flex-1 flex items-center justify-center gap-2 py-3.5 ${
                 selectedMethod === "QR_CODE"
-                  ? "bg-primary-50 border-b-2 border-primary-500"
+                  ? "bg-[#EEF2FF] border-b-2 border-[#6366F1]"
                   : ""
               }`}
               onClick={() => handleMethodChange("QR_CODE")}
               disabled={isSubmitting}
-              whileHover={
-                !isSubmitting ? { backgroundColor: COLORS.gray50 } : {}
-              }
+              whileHover={!isSubmitting ? { backgroundColor: "#F8FAFC" } : {}}
               whileTap={!isSubmitting ? { scale: 0.98 } : {}}
             >
               <svg
                 className={`w-5 h-5 ${
                   selectedMethod === "QR_CODE"
-                    ? "text-primary-500"
-                    : "text-gray-600"
+                    ? "text-[#6366F1]"
+                    : "text-[#475569]"
                 }`}
                 fill="none"
                 viewBox="0 0 24 24"
@@ -1116,8 +1113,8 @@ export default function PaymentScreen(): React.ReactElement {
               <span
                 className={`text-sm font-medium ${
                   selectedMethod === "QR_CODE"
-                    ? "text-primary-500 font-semibold"
-                    : "text-gray-600"
+                    ? "text-[#6366F1] font-semibold"
+                    : "text-[#475569]"
                 }`}
               >
                 QR 결제
@@ -1127,21 +1124,19 @@ export default function PaymentScreen(): React.ReactElement {
             <motion.button
               className={`flex-1 flex items-center justify-center gap-2 py-3.5 ${
                 selectedMethod === "STUDENT_ID"
-                  ? "bg-primary-50 border-b-2 border-primary-500"
+                  ? "bg-[#EEF2FF] border-b-2 border-[#6366F1]"
                   : ""
               }`}
               onClick={() => handleMethodChange("STUDENT_ID")}
               disabled={isSubmitting}
-              whileHover={
-                !isSubmitting ? { backgroundColor: COLORS.gray50 } : {}
-              }
+              whileHover={!isSubmitting ? { backgroundColor: "#F8FAFC" } : {}}
               whileTap={!isSubmitting ? { scale: 0.98 } : {}}
             >
               <svg
                 className={`w-5 h-5 ${
                   selectedMethod === "STUDENT_ID"
-                    ? "text-primary-500"
-                    : "text-gray-600"
+                    ? "text-[#6366F1]"
+                    : "text-[#475569]"
                 }`}
                 fill="none"
                 viewBox="0 0 24 24"
@@ -1157,8 +1152,8 @@ export default function PaymentScreen(): React.ReactElement {
               <span
                 className={`text-sm font-medium ${
                   selectedMethod === "STUDENT_ID"
-                    ? "text-primary-500 font-semibold"
-                    : "text-gray-600"
+                    ? "text-[#6366F1] font-semibold"
+                    : "text-[#475569]"
                 }`}
               >
                 학번 결제
@@ -1176,13 +1171,15 @@ export default function PaymentScreen(): React.ReactElement {
         </motion.div>
 
         <motion.div
-          className="w-1/3 min-w-72 flex flex-col bg-white rounded-xl border border-gray-200"
+          className="w-1/3 min-w-72 flex flex-col bg-[#FFFFFF] rounded-xl border border-[#E2E8F0]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
         >
-          <div className="py-3.5 px-5 border-b border-gray-200 h-13">
-            <h2 className="text-base font-semibold text-gray-800">주문 내역</h2>
+          <div className="py-3.5 px-5 border-b border-[#E2E8F0] h-13">
+            <h2 className="text-base font-semibold text-[#1E293B]">
+              주문 내역
+            </h2>
           </div>
 
           <div className="flex-1 overflow-auto">
@@ -1190,19 +1187,19 @@ export default function PaymentScreen(): React.ReactElement {
               {cart.map((item: CartItemType) => (
                 <motion.div
                   key={item.id}
-                  className="flex justify-between py-3 border-b border-gray-100"
+                  className="flex justify-between py-3 border-b border-[#F1F5F9]"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className="flex-1 text-sm font-medium text-gray-800 mr-2.5 truncate">
+                  <p className="flex-1 text-sm font-medium text-[#1E293B] mr-2.5 truncate">
                     {item.name}
                   </p>
                   <div className="flex items-center gap-3.5">
-                    <span className="text-sm text-gray-600 min-w-7 text-right">
+                    <span className="text-sm text-[#475569] min-w-7 text-right">
                       {item.quantity}개
                     </span>
-                    <span className="text-sm font-semibold text-gray-900 min-w-19 text-right">
+                    <span className="text-sm font-semibold text-[#1E293B] min-w-19 text-right">
                       {(item.price * item.quantity).toLocaleString()}원
                     </span>
                   </div>
@@ -1211,25 +1208,25 @@ export default function PaymentScreen(): React.ReactElement {
             </div>
           </div>
 
-          <div className="p-5 border-t border-gray-200">
+          <div className="p-5 border-t border-[#E2E8F0]">
             <div className="flex justify-between items-center mb-4">
-              <span className="text-base font-semibold text-gray-800">
+              <span className="text-base font-semibold text-[#1E293B]">
                 총 결제 금액
               </span>
-              <span className="text-xl font-bold text-primary-500">
+              <span className="text-xl font-bold text-[#6366F1]">
                 {getTotalAmount().toLocaleString()}원
               </span>
             </div>
 
             <motion.button
-              className="w-full h-12 bg-red-500 rounded-xl text-white font-semibold flex items-center justify-center"
+              className="w-full h-12 bg-[#EF4444] rounded-xl text-[#FFFFFF] font-semibold flex items-center justify-center"
               onClick={handleCancel}
               disabled={isSubmitting}
               whileHover={!isSubmitting ? { backgroundColor: "#e53e3e" } : {}}
               whileTap={!isSubmitting ? { scale: 0.98 } : {}}
             >
               {cancelOrderMutation.isPending ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-5 h-5 border-2 border-[#FFFFFF] border-t-transparent rounded-full animate-spin"></div>
               ) : (
                 <span>결제 취소</span>
               )}

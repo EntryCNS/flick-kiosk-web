@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { COLORS } from "@/constants/colors";
 import { useCartStore } from "@/stores/cart";
 import { usePaymentStore } from "@/stores/payment";
 
@@ -45,15 +44,15 @@ export default function PaymentComplete(): React.ReactElement {
   }, [handleGoToMenu, orderId, navigate]);
 
   return (
-    <div className="flex flex-col h-screen bg-white">
-      <header className="py-4 flex items-center justify-center border-b border-gray-100 bg-white">
-        <h1 className="text-2xl font-bold text-gray-900">
-          <span className="text-primary-500">Flick</span> Place
+    <div className="flex flex-col h-screen bg-[#FFFFFF]">
+      <header className="py-4 flex items-center justify-center border-b border-[#F1F5F9] bg-[#FFFFFF]">
+        <h1 className="text-2xl font-bold text-[#1E293B]">
+          <span className="text-[#6366F1]">Flick</span> Place
         </h1>
       </header>
 
       <motion.main
-        className="flex-1 flex flex-col justify-center items-center px-6 py-6 bg-white"
+        className="flex-1 flex flex-col justify-center items-center px-6 py-6 bg-[#FFFFFF]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -68,7 +67,7 @@ export default function PaymentComplete(): React.ReactElement {
         />
 
         <motion.h2
-          className="text-4xl font-bold text-gray-900 mb-4"
+          className="text-4xl font-bold text-[#1E293B] mb-4"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.3 }}
@@ -77,7 +76,7 @@ export default function PaymentComplete(): React.ReactElement {
         </motion.h2>
 
         <motion.p
-          className="text-lg text-gray-600 text-center mb-12 font-medium"
+          className="text-lg text-[#475569] text-center mb-12 font-medium"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.4 }}
@@ -92,19 +91,19 @@ export default function PaymentComplete(): React.ReactElement {
           transition={{ duration: 0.4, delay: 0.5 }}
         >
           <div className="flex flex-col items-center px-6">
-            <span className="text-base text-gray-600 mb-2 font-medium">
+            <span className="text-base text-[#475569] mb-2 font-medium">
               결제 금액
             </span>
-            <span className="text-2xl font-bold text-gray-900">
+            <span className="text-2xl font-bold text-[#1E293B]">
               {getTotalAmount().toLocaleString()}원
             </span>
           </div>
 
           <div className="flex flex-col items-center px-6">
-            <span className="text-base text-gray-600 mb-2 font-medium">
+            <span className="text-base text-[#475569] mb-2 font-medium">
               결제 시간
             </span>
-            <span className="text-2xl font-bold text-gray-900">
+            <span className="text-2xl font-bold text-[#1E293B]">
               {`${new Date().toLocaleTimeString("ko-KR", {
                 hour: "2-digit",
                 minute: "2-digit",
@@ -114,7 +113,7 @@ export default function PaymentComplete(): React.ReactElement {
         </motion.div>
 
         <motion.p
-          className="text-sm text-gray-500 mb-8"
+          className="text-sm text-[#64748B] mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.6 }}
@@ -123,10 +122,10 @@ export default function PaymentComplete(): React.ReactElement {
         </motion.p>
 
         <motion.button
-          className="bg-primary-500 py-4 px-6 rounded-xl w-3/5 text-center text-white text-lg font-semibold"
+          className="bg-[#6366F1] py-4 px-6 rounded-xl w-3/5 text-center text-[#FFFFFF] text-lg font-semibold"
           onClick={handleGoToMenu}
           whileTap={{ scale: 0.98 }}
-          whileHover={{ backgroundColor: COLORS.primary600 }}
+          whileHover={{ backgroundColor: "#4F46E5" }}
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.7 }}
