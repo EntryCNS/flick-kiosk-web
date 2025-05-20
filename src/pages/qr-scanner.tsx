@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { COLORS } from "@/constants/colors";
 import { API_URL } from "@/constants/api";
 import axios from "axios";
 import { useAuthStore } from "@/stores/auth";
@@ -157,26 +156,21 @@ export default function QrScannerPage(): React.ReactElement {
 
     if (!context) return;
 
-    // 비디오 레디 상태 확인
     if (video.readyState !== video.HAVE_ENOUGH_DATA) {
       animationFrameRef.current = requestAnimationFrame(scanQRCode);
       return;
     }
 
-    // Canvas 크기를 비디오 크기에 맞춤
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
-    // 비디오에서 프레임 캡처
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    // QR 코드 스캔
     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     const code = jsQR(imageData.data, imageData.width, imageData.height, {
       inversionAttempts: "dontInvert",
     });
 
-    // QR 코드가 발견되고 스캔 가능 상태일 때
     if (code && canScan.current && !registerMutation.isPending) {
       canScan.current = false;
       setScanActive(false);
@@ -188,11 +182,9 @@ export default function QrScannerPage(): React.ReactElement {
       }
     }
 
-    // 계속 스캔
     animationFrameRef.current = requestAnimationFrame(scanQRCode);
   }, [isStreaming, registerMutation, resetScanState, scanActive]);
 
-  // 비디오 스트림이 준비되면 스캔 시작
   useEffect(() => {
     if (isStreaming && videoRef.current && videoRef.current.readyState >= 2) {
       scanQRCode();
@@ -207,15 +199,15 @@ export default function QrScannerPage(): React.ReactElement {
 
   if (permission === "pending") {
     return (
-      <div className="flex flex-col h-screen bg-white">
+      <div className="flex flex-col h-screen bg-[#FFFFFF]">
         <Header onBack={goBack} />
         <div className="flex-1 flex items-center justify-center">
           <motion.div
-            className="w-8 h-8 border-4 border-primary-500 border-t-transparent rounded-full"
+            className="w-8 h-8 border-4 border-[#6366F1] border-t-transparent rounded-full"
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           />
-          <p className="mt-4 text-base font-medium text-gray-600">
+          <p className="mt-4 text-base font-medium text-[#475569]">
             카메라 권한을 확인하는 중입니다
           </p>
         </div>
@@ -225,11 +217,11 @@ export default function QrScannerPage(): React.ReactElement {
 
   if (permission === "denied") {
     return (
-      <div className="flex flex-col h-screen bg-white">
+      <div className="flex flex-col h-screen bg-[#FFFFFF]">
         <Header onBack={goBack} />
         <div className="flex-1 flex flex-col items-center justify-center px-6">
           <motion.h2
-            className="text-2xl font-bold text-gray-900 mb-3 text-center"
+            className="text-2xl font-bold text-[#1E293B] mb-3 text-center"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
@@ -237,7 +229,7 @@ export default function QrScannerPage(): React.ReactElement {
             카메라 권한이 필요합니다
           </motion.h2>
           <motion.p
-            className="text-base font-medium text-gray-600 text-center mb-8"
+            className="text-base font-medium text-[#475569] text-center mb-8"
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
@@ -245,12 +237,12 @@ export default function QrScannerPage(): React.ReactElement {
             QR 코드를 스캔하려면 카메라 접근 권한이 필요합니다
           </motion.p>
           <motion.button
-            className="bg-primary-500 text-white py-3.5 px-5 rounded-lg min-w-52 text-base font-semibold"
+            className="bg-[#6366F1] text-[#FFFFFF] py-3.5 px-5 rounded-lg min-w-52 text-base font-semibold"
             onClick={requestPermission}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
-            whileHover={{ backgroundColor: COLORS.primary600 }}
+            whileHover={{ backgroundColor: "#4F46E5" }}
             whileTap={{ scale: 0.95 }}
           >
             다시 시도
@@ -261,7 +253,7 @@ export default function QrScannerPage(): React.ReactElement {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-black">
+    <div className="flex flex-col h-screen bg-[#000000]">
       <div className="relative w-full h-full">
         <video
           ref={videoRef}
@@ -282,14 +274,14 @@ export default function QrScannerPage(): React.ReactElement {
               transition={{ duration: 0.3 }}
             >
               {/* Corner Borders */}
-              <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-white rounded-tl-2xl"></div>
-              <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-white rounded-tr-2xl"></div>
-              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-white rounded-bl-2xl"></div>
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-white rounded-br-2xl"></div>
+              <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-[#FFFFFF] rounded-tl-2xl"></div>
+              <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-[#FFFFFF] rounded-tr-2xl"></div>
+              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-[#FFFFFF] rounded-bl-2xl"></div>
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-[#FFFFFF] rounded-br-2xl"></div>
 
               {scanActive && (
                 <motion.div
-                  className="absolute top-0 left-0 w-full h-0.5 bg-white opacity-80"
+                  className="absolute top-0 left-0 w-full h-0.5 bg-[#FFFFFF] opacity-80"
                   animate={{
                     top: ["0%", "100%", "0%"],
                   }}
@@ -303,7 +295,7 @@ export default function QrScannerPage(): React.ReactElement {
             </motion.div>
 
             <motion.p
-              className="absolute mt-80 text-lg font-medium text-white text-center"
+              className="absolute mt-80 text-lg font-medium text-[#FFFFFF] text-center"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
@@ -313,13 +305,13 @@ export default function QrScannerPage(): React.ReactElement {
 
             {registerMutation.isPending && (
               <motion.div
-                className="absolute bg-black bg-opacity-70 py-5 px-6 rounded-lg min-w-40 flex flex-col items-center"
+                className="absolute bg-[#000000] bg-opacity-70 py-5 px-6 rounded-lg min-w-40 flex flex-col items-center"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2 }}
               >
                 <motion.div
-                  className="w-8 h-8 border-4 border-white border-t-transparent rounded-full"
+                  className="w-8 h-8 border-4 border-[#FFFFFF] border-t-transparent rounded-full"
                   animate={{ rotate: 360 }}
                   transition={{
                     duration: 1.2,
@@ -327,7 +319,7 @@ export default function QrScannerPage(): React.ReactElement {
                     ease: "linear",
                   }}
                 />
-                <p className="mt-3 text-base font-medium text-white">
+                <p className="mt-3 text-base font-medium text-[#FFFFFF]">
                   처리 중...
                 </p>
               </motion.div>
@@ -349,11 +341,11 @@ function Header({ onBack }: HeaderProps): React.ReactElement {
       <motion.button
         className="w-10 h-10 flex items-center justify-center rounded-full"
         onClick={onBack}
-        whileHover={{ backgroundColor: COLORS.gray100 }}
+        whileHover={{ backgroundColor: "#F1F5F9" }}
         whileTap={{ scale: 0.9 }}
       >
         <svg
-          className="w-6 h-6 text-gray-900"
+          className="w-6 h-6 text-[#1E293B]"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -366,7 +358,7 @@ function Header({ onBack }: HeaderProps): React.ReactElement {
           />
         </svg>
       </motion.button>
-      <h1 className="text-lg font-semibold text-gray-900">QR 코드 스캔</h1>
+      <h1 className="text-lg font-semibold text-[#1E293B]">QR 코드 스캔</h1>
       <div className="w-10"></div>
     </div>
   );
@@ -393,7 +385,7 @@ function HeaderLight({
         whileTap={!disabled ? { scale: 0.9 } : {}}
       >
         <svg
-          className="w-6 h-6 text-white"
+          className="w-6 h-6 text-[#FFFFFF]"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -406,7 +398,7 @@ function HeaderLight({
           />
         </svg>
       </motion.button>
-      <h1 className="text-lg font-semibold text-white">QR 코드 스캔</h1>
+      <h1 className="text-lg font-semibold text-[#FFFFFF]">QR 코드 스캔</h1>
       <div className="w-10"></div>
     </div>
   );

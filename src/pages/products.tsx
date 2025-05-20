@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { COLORS } from "@/constants/colors";
 import { API_URL } from "@/constants/api";
 import { isAxiosError } from "axios";
 import { useAuthStore } from "@/stores/auth";
@@ -126,7 +125,7 @@ export default function ProductsScreen() {
       if (confirm("이 키오스크의 연결을 해제하시겠습니까?")) {
         signOut();
         clearCart();
-        navigate("/auth");
+        navigate("/login");
       }
       setSecretTapCount(0);
     }
@@ -190,9 +189,9 @@ export default function ProductsScreen() {
   );
 
   return (
-    <div className="flex flex-col h-screen bg-white">
+    <div className="flex flex-col h-screen bg-[#FFFFFF]">
       <motion.header
-        className="flex items-center px-6 py-4 border-b border-gray-100 bg-white z-10"
+        className="flex items-center px-6 py-4 border-b border-[#F1F5F9] bg-[#FFFFFF] z-10"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
@@ -208,8 +207,8 @@ export default function ProductsScreen() {
             className="w-10 h-10 mr-2.5"
           />
           <div>
-            <h1 className="text-xl font-semibold text-gray-900">
-              <span className="text-primary-600">F</span>lick Place
+            <h1 className="text-xl font-semibold text-[#1E293B]">
+              <span className="text-[#4F46E5]">F</span>lick Place
             </h1>
           </div>
         </motion.div>
@@ -218,22 +217,22 @@ export default function ProductsScreen() {
       <div className="flex flex-1">
         {/* Products Section */}
         <motion.div
-          className="flex-grow p-5 bg-white"
+          className="flex-grow p-5 bg-[#FFFFFF] overflow-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.1 }}
         >
           {isLoading && !isRefetching ? (
             <div className="flex flex-col items-center justify-center h-full">
-              <div className="w-10 h-10 border-4 border-primary-600 border-t-transparent rounded-full animate-spin"></div>
-              <p className="mt-4 text-base font-medium text-gray-500">
+              <div className="w-10 h-10 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin"></div>
+              <p className="mt-4 text-base font-medium text-[#64748B]">
                 상품을 불러오는 중...
               </p>
             </div>
           ) : isError ? (
             <div className="flex flex-col items-center justify-center h-full">
               <svg
-                className="w-12 h-12 text-red-500"
+                className="w-12 h-12 text-[#EF4444]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -245,13 +244,13 @@ export default function ProductsScreen() {
                   d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <p className="mt-4 mb-6 text-base font-medium text-red-500">
+              <p className="mt-4 mb-6 text-base font-medium text-[#EF4444]">
                 상품을 불러올 수 없습니다
               </p>
               <motion.button
-                className="px-5 py-3 text-base font-semibold text-white bg-primary-600 rounded-xl"
+                className="px-5 py-3 text-base font-semibold text-[#FFFFFF] bg-[#4F46E5] rounded-xl"
                 onClick={() => refetch()}
-                whileHover={{ backgroundColor: COLORS.primary700 }}
+                whileHover={{ backgroundColor: "#4338CA" }}
                 whileTap={{ scale: 0.95 }}
               >
                 다시 시도
@@ -271,14 +270,14 @@ export default function ProductsScreen() {
                   <motion.div
                     key={product.id}
                     className={`
-                     flex flex-col border rounded-xl overflow-hidden h-56 relative cursor-pointer
-                     ${isSoldOut ? "opacity-70 cursor-not-allowed" : ""}
-                     ${
-                       inCart
-                         ? "border-2 border-primary-600"
-                         : "border-gray-200"
-                     }
-                   `}
+                      flex flex-col border rounded-xl overflow-hidden h-56 relative cursor-pointer
+                      ${isSoldOut ? "opacity-70 cursor-not-allowed" : ""}
+                      ${
+                        inCart
+                          ? "border-2 border-[#4F46E5]"
+                          : "border-[#E2E8F0]"
+                      }
+                    `}
                     onClick={() => !isSoldOut && handleAddToCart(product)}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -290,7 +289,7 @@ export default function ProductsScreen() {
                     }
                     whileTap={!isSoldOut ? { scale: 0.98 } : {}}
                   >
-                    <div className="relative w-full h-36 bg-gray-200">
+                    <div className="relative w-full h-36 bg-[#E2E8F0]">
                       <img
                         src={
                           product.imageUrl || "/assets/images/placeholder.png"
@@ -299,15 +298,15 @@ export default function ProductsScreen() {
                         className="object-cover w-full h-full"
                       />
                       {isSoldOut && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                          <span className="px-4 py-2 text-lg font-bold text-white bg-black bg-opacity-60 rounded-full">
+                        <div className="absolute inset-0 flex items-center justify-center bg-[#000000]/50">
+                          <span className="px-4 py-2 text-lg font-bold text-[#FFFFFF] bg-[#000000]/60 rounded-full">
                             품절
                           </span>
                         </div>
                       )}
                       {inCart && (
                         <motion.div
-                          className="absolute top-2 right-2 flex items-center justify-center w-6 h-6 text-sm font-bold text-white bg-primary-600 rounded-full"
+                          className="absolute top-2 right-2 flex items-center justify-center w-6 h-6 text-sm font-bold text-[#FFFFFF] bg-[#4F46E5] rounded-full"
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{
@@ -321,19 +320,19 @@ export default function ProductsScreen() {
                       )}
                     </div>
                     <div className="flex flex-col justify-between flex-1 p-3">
-                      <h3 className="text-base font-semibold text-gray-900 truncate">
+                      <h3 className="text-base font-semibold text-[#1E293B] truncate">
                         {product.name}
                       </h3>
                       <div>
                         <p
                           className={`text-base font-bold ${
-                            isSoldOut ? "text-gray-500" : "text-primary-600"
+                            isSoldOut ? "text-[#64748B]" : "text-[#4F46E5]"
                           }`}
                         >
                           {product.price.toLocaleString()}원
                         </p>
                         {!isSoldOut && (
-                          <p className="mt-1 text-xs text-gray-500">
+                          <p className="mt-1 text-xs text-[#64748B]">
                             재고: {product.stock}개
                           </p>
                         )}
@@ -348,16 +347,16 @@ export default function ProductsScreen() {
 
         {/* Cart Section */}
         <motion.div
-          className="w-1/4 min-w-80 flex flex-col border-l border-gray-100 bg-white"
+          className="w-1/4 min-w-80 flex flex-col border-l border-[#F1F5F9] bg-[#FFFFFF]"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
         >
-          <div className="flex justify-between items-center p-5 border-b border-gray-100 h-16">
-            <h2 className="text-xl font-bold text-gray-900">장바구니</h2>
+          <div className="flex justify-between items-center p-5 border-b border-[#F1F5F9] h-16">
+            <h2 className="text-xl font-bold text-[#1E293B]">장바구니</h2>
             {cart.length > 0 && (
               <motion.button
-                className="flex items-center px-3 py-1.5 text-sm font-medium text-white bg-red-500 rounded-full"
+                className="flex items-center px-3 py-1.5 text-sm font-medium text-[#FFFFFF] bg-[#EF4444] rounded-full"
                 onClick={clearCart}
                 whileHover={{ backgroundColor: "#e53e3e" }}
                 whileTap={{ scale: 0.95 }}
@@ -387,7 +386,7 @@ export default function ProductsScreen() {
             {cart.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full p-6">
                 <svg
-                  className="w-14 h-14 text-gray-300"
+                  className="w-14 h-14 text-[#CBD5E1]"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -399,10 +398,10 @@ export default function ProductsScreen() {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <p className="mt-4 text-base font-semibold text-gray-500">
+                <p className="mt-4 text-base font-semibold text-[#64748B]">
                   장바구니가 비어있습니다
                 </p>
-                <p className="mt-2 text-sm font-medium text-gray-500">
+                <p className="mt-2 text-sm font-medium text-[#64748B]">
                   상품을 선택해주세요
                 </p>
               </div>
@@ -417,7 +416,7 @@ export default function ProductsScreen() {
                     return (
                       <motion.div
                         key={item.id}
-                        className="flex justify-between items-center py-4 border-b border-gray-100"
+                        className="flex justify-between items-center py-4 border-b border-[#F1F5F9]"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, x: -100 }}
@@ -428,25 +427,25 @@ export default function ProductsScreen() {
                           onClick={() => updateQuantity(item.id, 0)}
                           whileTap={{ scale: 0.98 }}
                         >
-                          <h3 className="text-base font-semibold text-gray-900 truncate">
+                          <h3 className="text-base font-semibold text-[#1E293B] truncate">
                             {item.name}
                           </h3>
                           <div className="flex items-center">
-                            <span className="text-primary-600 text-base font-semibold">
+                            <span className="text-[#4F46E5] text-base font-semibold">
                               {(item.price * item.quantity).toLocaleString()}원
                             </span>
-                            <span className="ml-1 text-xs text-gray-500">
+                            <span className="ml-1 text-xs text-[#64748B]">
                               ({item.price.toLocaleString()}원/개)
                             </span>
                           </div>
                         </motion.div>
                         <div className="flex items-center">
                           <motion.button
-                            className="flex items-center justify-center w-7 h-7 bg-primary-500 text-white rounded-full"
+                            className="flex items-center justify-center w-7 h-7 bg-[#6366F1] text-[#FFFFFF] rounded-full"
                             onClick={() =>
                               handleQuantityUpdate(item.id, item.quantity - 1)
                             }
-                            whileHover={{ backgroundColor: COLORS.primary600 }}
+                            whileHover={{ backgroundColor: "#4F46E5" }}
                             whileTap={{ scale: 0.9 }}
                           >
                             <svg
@@ -473,17 +472,15 @@ export default function ProductsScreen() {
                             {item.quantity}
                           </motion.span>
                           <motion.button
-                            className={`flex items-center justify-center w-7 h-7 text-white rounded-full ${
-                              maxReached ? "bg-gray-300" : "bg-primary-600"
+                            className={`flex items-center justify-center w-7 h-7 text-[#FFFFFF] rounded-full ${
+                              maxReached ? "bg-[#CBD5E1]" : "bg-[#4F46E5]"
                             }`}
                             onClick={() =>
                               handleQuantityUpdate(item.id, item.quantity + 1)
                             }
                             disabled={maxReached}
                             whileHover={
-                              !maxReached
-                                ? { backgroundColor: COLORS.primary700 }
-                                : {}
+                              !maxReached ? { backgroundColor: "#4338CA" } : {}
                             }
                             whileTap={!maxReached ? { scale: 0.9 } : {}}
                           >
@@ -510,13 +507,13 @@ export default function ProductsScreen() {
             )}
           </div>
 
-          <div className="p-5 border-t border-gray-100 bg-white">
+          <div className="p-5 border-t border-[#F1F5F9] bg-[#FFFFFF]">
             <div className="flex justify-between mb-2.5">
-              <span className="text-base font-medium text-gray-500">
+              <span className="text-base font-medium text-[#64748B]">
                 총 수량
               </span>
               <motion.span
-                className="text-base font-semibold text-gray-900"
+                className="text-base font-semibold text-[#1E293B]"
                 key={getTotalItems()}
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}
@@ -526,11 +523,11 @@ export default function ProductsScreen() {
               </motion.span>
             </div>
             <div className="flex justify-between mb-2.5">
-              <span className="text-base font-medium text-gray-500">
+              <span className="text-base font-medium text-[#64748B]">
                 총 금액
               </span>
               <motion.span
-                className="text-xl font-bold text-primary-600"
+                className="text-xl font-bold text-[#4F46E5]"
                 key={getTotalAmount()}
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}
@@ -541,18 +538,18 @@ export default function ProductsScreen() {
             </div>
             <motion.button
               className={`
-               flex items-center justify-center w-full py-4 mt-4 text-base font-semibold text-white rounded-xl
-               ${
-                 cart.length === 0 || orderMutation.isPending
-                   ? "bg-gray-300"
-                   : "bg-primary-600"
-               }
-             `}
+                flex items-center justify-center w-full py-4 mt-4 text-base font-semibold text-[#FFFFFF] rounded-xl
+                ${
+                  cart.length === 0 || orderMutation.isPending
+                    ? "bg-[#CBD5E1]"
+                    : "bg-[#4F46E5]"
+                }
+              `}
               onClick={handlePayment}
               disabled={cart.length === 0 || orderMutation.isPending}
               whileHover={
                 cart.length > 0 && !orderMutation.isPending
-                  ? { backgroundColor: COLORS.primary700 }
+                  ? { backgroundColor: "#4338CA" }
                   : {}
               }
               whileTap={
@@ -562,7 +559,7 @@ export default function ProductsScreen() {
               }
             >
               {orderMutation.isPending ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-5 h-5 border-2 border-[#FFFFFF] border-t-transparent rounded-full animate-spin"></div>
               ) : (
                 <>
                   <svg
@@ -596,13 +593,13 @@ export default function ProductsScreen() {
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="flex items-center px-5 py-4 bg-white rounded-xl shadow-md max-w-md"
+              className="flex items-center px-5 py-4 bg-[#FFFFFF] rounded-xl shadow-md max-w-md"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.2 }}
             >
               <svg
-                className="w-6 h-6 text-red-500"
+                className="w-6 h-6 text-[#EF4444]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -614,7 +611,7 @@ export default function ProductsScreen() {
                   d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span className="ml-3 text-base font-medium text-gray-900">
+              <span className="ml-3 text-base font-medium text-[#1E293B]">
                 {alertMessage}
               </span>
             </motion.div>

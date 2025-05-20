@@ -144,15 +144,15 @@ export default function LoginScreen(): React.ReactElement {
   }, []);
 
   return (
-    <div className="flex flex-col h-full bg-white">
-      <header className="flex items-center px-6 py-4 border-b border-gray-100 h-16">
+    <div className="flex flex-col h-full bg-[#FFFFFF]">
+      <header className="flex items-center px-6 py-4 border-b border-[#F1F5F9] h-16">
         <img
           src="/assets/images/logo.png"
           alt="Logo"
           className="w-9 h-9 mr-3"
         />
-        <h1 className="text-2xl font-bold text-gray-900">
-          <span className="text-primary-500">Flick</span> Place
+        <h1 className="text-2xl font-bold text-[#1E293B]">
+          <span className="text-[#6366F1]">Flick</span> Place
         </h1>
       </header>
 
@@ -163,19 +163,19 @@ export default function LoginScreen(): React.ReactElement {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-7 text-center">
+          <h2 className="text-2xl font-bold text-[#1E293B] mb-7 text-center">
             키오스크 로그인
           </h2>
 
           {errors.root?.message && (
             <motion.div
-              className="flex items-center bg-red-50 py-3.5 px-4 rounded-lg mb-6 border border-red-100"
+              className="flex items-center bg-[#FEF2F2] py-3.5 px-4 rounded-lg mb-6 border border-[#FEE2E2]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.25 }}
             >
               <svg
-                className="w-5 h-5 text-red-500 mr-2"
+                className="w-5 h-5 text-[#EF4444] mr-2"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -187,7 +187,7 @@ export default function LoginScreen(): React.ReactElement {
                   d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span className="flex-1 text-sm font-medium text-red-600">
+              <span className="flex-1 text-sm font-medium text-[#DC2626]">
                 {errors.root.message}
               </span>
             </motion.div>
@@ -198,13 +198,13 @@ export default function LoginScreen(): React.ReactElement {
               <div className="flex justify-between items-center mb-2">
                 <label
                   htmlFor="username"
-                  className="text-sm font-medium text-gray-700"
+                  className="text-sm font-medium text-[#475569]"
                 >
                   아이디
                 </label>
                 {errors.username?.message && (
                   <motion.span
-                    className="text-sm font-medium text-red-500"
+                    className="text-sm font-medium text-[#EF4444]"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
@@ -221,11 +221,11 @@ export default function LoginScreen(): React.ReactElement {
                   register("username").ref(e);
                   usernameRef.current = e;
                 }}
-                className={`w-full h-14 rounded-lg px-4 text-base text-gray-900 ${
+                className={`w-full h-14 rounded-lg px-4 text-base text-[#1E293B] ${
                   focusedField === "username"
-                    ? "border-2 border-primary-500 bg-white"
-                    : "border border-gray-200 bg-gray-50"
-                } ${errors.username ? "border-red-500" : ""}`}
+                    ? "border-2 border-[#6366F1] bg-[#FFFFFF]"
+                    : "border border-[#E2E8F0] bg-[#F8FAFC]"
+                } ${errors.username ? "border-[#EF4444]" : ""}`}
                 placeholder="아이디를 입력하세요"
                 onFocus={() => handleFieldFocus("username")}
                 onBlur={handleFieldBlur}
@@ -240,13 +240,13 @@ export default function LoginScreen(): React.ReactElement {
               <div className="flex justify-between items-center mb-2">
                 <label
                   htmlFor="password"
-                  className="text-sm font-medium text-gray-700"
+                  className="text-sm font-medium text-[#475569]"
                 >
                   비밀번호
                 </label>
                 {errors.password?.message && (
                   <motion.span
-                    className="text-sm font-medium text-red-500"
+                    className="text-sm font-medium text-[#EF4444]"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
@@ -263,11 +263,11 @@ export default function LoginScreen(): React.ReactElement {
                   register("password").ref(e);
                   passwordRef.current = e;
                 }}
-                className={`w-full h-14 rounded-lg px-4 text-base text-gray-900 ${
+                className={`w-full h-14 rounded-lg px-4 text-base text-[#1E293B] ${
                   focusedField === "password"
-                    ? "border-2 border-primary-500 bg-white"
-                    : "border border-gray-200 bg-gray-50"
-                } ${errors.password ? "border-red-500" : ""}`}
+                    ? "border-2 border-[#6366F1] bg-[#FFFFFF]"
+                    : "border border-[#E2E8F0] bg-[#F8FAFC]"
+                } ${errors.password ? "border-[#EF4444]" : ""}`}
                 placeholder="비밀번호를 입력하세요"
                 onFocus={() => handleFieldFocus("password")}
                 onBlur={handleFieldBlur}
@@ -281,8 +281,8 @@ export default function LoginScreen(): React.ReactElement {
                 !formValues.username ||
                 !formValues.password ||
                 loginMutation.isPending
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-primary-500 hover:bg-primary-600"
+                  ? "bg-[#CBD5E1] cursor-not-allowed"
+                  : "bg-[#6366F1] hover:bg-[#4F46E5]"
               }`}
               disabled={
                 !formValues.username ||
@@ -298,9 +298,9 @@ export default function LoginScreen(): React.ReactElement {
               }
             >
               {loginMutation.isPending ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-5 h-5 border-2 border-[#FFFFFF] border-t-transparent rounded-full animate-spin"></div>
               ) : (
-                <span className="text-white text-base font-semibold">
+                <span className="text-[#FFFFFF] text-base font-semibold">
                   로그인
                 </span>
               )}
@@ -308,23 +308,23 @@ export default function LoginScreen(): React.ReactElement {
           </form>
 
           <div className="flex items-center my-6">
-            <div className="flex-1 h-px bg-gray-200"></div>
-            <span className="mx-4 text-sm text-gray-500">또는</span>
-            <div className="flex-1 h-px bg-gray-200"></div>
+            <div className="flex-1 h-px bg-[#E2E8F0]"></div>
+            <span className="mx-4 text-sm text-[#64748B]">또는</span>
+            <div className="flex-1 h-px bg-[#E2E8F0]"></div>
           </div>
 
           <motion.button
-            className={`w-full h-14 rounded-lg flex items-center justify-center border border-primary-500 ${
+            className={`w-full h-14 rounded-lg flex items-center justify-center border border-[#6366F1] ${
               loginMutation.isPending
                 ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-primary-50"
+                : "hover:bg-[#EEF2FF]"
             }`}
             onClick={goToQrScanner}
             disabled={loginMutation.isPending}
             whileTap={loginMutation.isPending ? {} : { scale: 0.98 }}
           >
             <svg
-              className="w-5 h-5 text-primary-500 mr-2.5"
+              className="w-5 h-5 text-[#6366F1] mr-2.5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -336,7 +336,7 @@ export default function LoginScreen(): React.ReactElement {
                 d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1v-2a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1z"
               />
             </svg>
-            <span className="text-primary-500 text-base font-semibold">
+            <span className="text-[#6366F1] text-base font-semibold">
               QR 코드로 등록하기
             </span>
           </motion.button>
